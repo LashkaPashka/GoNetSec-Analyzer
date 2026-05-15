@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/lashkapashka/GoNetSec_Analyzer/internal/telegram"
 )
@@ -21,7 +22,9 @@ func NewTelegramNotifier(token, chatID string) *TelegramNotify {
 	return &TelegramNotify{
 		token:  token,
 		chatID: chatID,
-		client: &http.Client{},
+		client: &http.Client{
+			Timeout: 10 * time.Second,
+		},
 	}
 }
 
