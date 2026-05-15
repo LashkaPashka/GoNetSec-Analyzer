@@ -18,6 +18,7 @@ type serviceProvider struct {
 	bufferSizeConfig config.BufferSizeConfig
 	telegramToken    config.TelegramTokenConfig
 	chatID           config.ChatIDConfig
+	workersNumber    config.WorkersConfig
 
 	telegramBot telegram.TelegramNotifier
 	notify      notifier.Notifier
@@ -78,6 +79,19 @@ func (s *serviceProvider) BufferSizeConfig() config.BufferSizeConfig {
 	}
 
 	return s.bufferSizeConfig
+}
+
+func (s *serviceProvider) WorkersConfig() config.WorkersConfig {
+	if s.workersNumber == nil {
+		cfg, err := env.NewWorkers()
+		if err != nil {
+			log.Fatalf("failed to get buffer size config: %s", err.Error())
+		}
+
+		s.workersNumber = cfg
+	}
+
+	return s.workersNumber
 }
 
 func (s *serviceProvider) TelegramBot() telegram.TelegramNotifier {

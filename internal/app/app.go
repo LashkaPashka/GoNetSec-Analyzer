@@ -25,7 +25,7 @@ func NewApp(ctx context.Context) (*App, error) {
 }
 
 func (a *App) Run(ctx context.Context) error {
-	workers := 5
+	workers := a.serviceProvider.WorkersConfig().GetWorkers()
 
 	logChan := make(chan string, 1000)
 	alertChan := make(chan string, 100)

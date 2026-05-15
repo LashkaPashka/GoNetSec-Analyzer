@@ -18,23 +18,22 @@ type AlertNotify struct {
 	telegramNotifier telegram.TelegramNotifier
 }
 
-func NewAlertNotify(telegramNotifier telegram.TelegramNotifier) AlertNotify {
-	return AlertNotify{
+func NewAlertNotify(telegramNotifier telegram.TelegramNotifier) *AlertNotify {
+	if telegramNotifier == nil {
+		return nil
+	}
+
+	return &AlertNotify{
 		telegramNotifier: telegramNotifier,
 	}
 }
 
 func (a AlertNotify) AlertNotifier(ctx context.Context, alertChan <-chan string, workers int) error {
-	if a.telegramNotifier == nil {
-		return fmt.Errorf("telegram notifier is nil")
-	}
-	
-	g, gctx := errgroup.WithContext(ctx)
-
 	if workers <= 0 {
 		workers = 1
 	}
 
+	g, gctx := errgroup.WithContext(ctx)
 	for i := 0; i < workers; i++ {
 		g.Go(func() error {
 			for {

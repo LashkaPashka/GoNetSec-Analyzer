@@ -20,6 +20,10 @@ type ChatIDConfig interface {
 	GetChatID() string
 }
 
+type WorkersConfig interface {
+	GetWorkers() int
+}
+
 func Load(path string) error {
 	err := godotenv.Load(path)
 	if err != nil {
