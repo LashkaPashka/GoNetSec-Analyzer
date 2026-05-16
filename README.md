@@ -28,7 +28,7 @@
 
 ### 1. Клонирование репозитория
 ```bash
-git clone git@github.com:LashkaPashka/GoNetSec-Analyzer.git
+git clone https://github.com/LashkaPashka/GoNetSec-Analyzer.git
 cd GoNetSec-Analyzer
 ```
 
