@@ -46,7 +46,7 @@ func (s *serviceProvider) TelegramTokenConfig() config.TelegramTokenConfig {
 	if s.telegramToken == nil {
 		cfg, err := env.NewTelegramToken()
 		if err != nil {
-			log.Fatalf("failed to get udp port config: %s", err.Error())
+			log.Fatalf("failed to get telegram token config: %s", err.Error())
 		}
 
 		s.telegramToken = cfg
@@ -59,7 +59,7 @@ func (s *serviceProvider) ChatIDConfig() config.ChatIDConfig {
 	if s.chatID == nil {
 		cfg, err := env.NewChatID()
 		if err != nil {
-			log.Fatalf("failed to get udp port config: %s", err.Error())
+			log.Fatalf("failed to get chatID config: %s", err.Error())
 		}
 
 		s.chatID = cfg
@@ -85,7 +85,7 @@ func (s *serviceProvider) WorkersConfig() config.WorkersConfig {
 	if s.workersNumber == nil {
 		cfg, err := env.NewWorkers()
 		if err != nil {
-			log.Fatalf("failed to get buffer size config: %s", err.Error())
+			log.Fatalf("failed to get workersNumber config: %s", err.Error())
 		}
 
 		s.workersNumber = cfg
